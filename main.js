@@ -7,7 +7,7 @@ if (squirrelStartup) {
   app.quit();
 }
 
-import path from "path"; // <--- THIS LINE IS LIKELY MISSING
+import path from "path";
 import { fileURLToPath } from "url";
 import Store from "electron-store";
 
