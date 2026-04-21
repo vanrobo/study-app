@@ -1,0 +1,43 @@
+{
+  "name": "kard",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "description": "Kard: Spaced Repetition Study Scheduler for Class 12",
+  "author": "Vansh (Vanrobo) Rishi",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^40.2.1",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^11.0.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "electron": "^40.2.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./icon",
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "Kard",
+            "setupIcon": "./icon.ico"
+          }
+        }
+      ]
+    }
+  }
+}

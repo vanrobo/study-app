@@ -1,0 +1,406 @@
+:root {
+  --bg-app: #121212;
+  --bg-sidebar: #18181b;
+  --bg-card: #27272a;
+  --bg-input: #3f3f46;
+  --border: #3f3f46;
+  --text-high: #f4f4f5;
+  --text-med: #a1a1aa;
+
+  /* DEFAULT THEME (Violet) */
+  --accent: #8b5cf6;
+  --accent-rgb: 139, 92, 246; /* We need this for transparency */
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg-app);
+  color: var(--text-high);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- TITLE BAR --- */
+#title-bar {
+  height: 36px;
+  background: var(--bg-app);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-app-region: drag;
+  border-bottom: 1px solid var(--border);
+  padding-left: 16px;
+}
+.app-logo {
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+.win-controls {
+  display: flex;
+  -webkit-app-region: no-drag;
+  height: 100%;
+}
+.win-btn {
+  width: 48px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-med);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+.win-btn.close:hover {
+  background: var(--danger);
+}
+
+/* --- LAYOUT --- */
+#app-body {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 36px);
+}
+
+#sidebar {
+  width: 260px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 12px;
+  gap: 4px;
+}
+
+/* FIX: Use RGB variable for dynamic background transparency */
+.nav-item {
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-med);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-high);
+}
+.nav-item.active {
+  background: rgba(var(--accent-rgb), 0.15); /* DYNAMIC COLOR FIX */
+  color: var(--accent);
+}
+
+#content {
+  flex: 1;
+  padding: 48px;
+  overflow-y: auto;
+}
+h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.subtitle {
+  color: var(--text-med);
+  margin-bottom: 40px;
+  font-size: 15px;
+}
+
+/* --- INPUTS --- */
+.input-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+.input-group label {
+  display: block;
+  color: var(--text-med);
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+input,
+select {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  transition: 0.2s;
+  appearance: none;
+}
+input:focus {
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* --- CARDS & TABLES --- */
+.task-card {
+  background: var(--bg-card);
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.task-info p {
+  margin: 6px 0 0;
+  color: var(--text-med);
+  font-size: 14px;
+}
+
+.subject-tag {
+  background: rgba(var(--accent-rgb), 0.1); /* DYNAMIC COLOR FIX */
+  color: var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.lib-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 20px;
+  table-layout: fixed; 
+}
+
+.lib-table th:nth-child(1),
+.lib-table td:nth-child(1) {
+  width: 15%;
+} /* Subject */
+.lib-table th:nth-child(2),
+.lib-table td:nth-child(2) {
+  width: 40%;
+} /* Topic */
+.lib-table th:nth-child(3),
+.lib-table td:nth-child(3) {
+  width: 15%;
+} /* Status */
+.lib-table th:nth-child(4),
+.lib-table td:nth-child(4) {
+  width: 20%;
+} /* Next Review */
+.lib-table th:nth-child(5),
+.lib-table td:nth-child(5) {
+  width: 10%;
+  text-align: right;
+} /* Actions */
+
+.lib-table th {
+  text-align: left;
+  color: var(--text-med);
+  padding: 0 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.lib-table td {
+  background: var(--bg-card);
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+/* Rounded corners for the row boxes */
+.lib-table tr td:first-child {
+  border-left: 1px solid var(--border);
+  border-radius: 12px 0 0 12px;
+  padding-left: 20px;
+}
+.lib-table tr td:last-child {
+  border-right: 1px solid var(--border);
+  border-radius: 0 12px 12px 0;
+  padding-right: 20px;
+}
+
+/* --- BUTTONS --- */
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.btn:hover {
+  background: var(--bg-input);
+  filter: brightness(1.1);
+} /* Better hover for dynamic colors */
+
+.btn-icon-danger {
+  background: transparent;
+  border: none;
+  color: var(--text-med);
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-flex;
+}
+.btn-icon-danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+/* --- RATING BOXES --- */
+.rating-container {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-app);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.rate-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-med);
+  transition: 0.2s;
+}
+.rate-box:hover {
+  color: white;
+  background: var(--bg-input);
+}
+.rate-box:nth-child(1):hover {
+  background: #ef4444;
+}
+.rate-box:nth-child(2):hover {
+  background: #f97316;
+}
+.rate-box:nth-child(3):hover {
+  background: #eab308;
+}
+.rate-box:nth-child(4):hover {
+  background: #84cc16;
+}
+.rate-box:nth-child(5):hover {
+  background: #22c55e;
+}
+
+/* --- MODAL (The New Stuff) --- */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dim background */
+  backdrop-filter: blur(4px); /* Blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-box {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.2s ease-out;
+}
+
+.modal-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+.modal-box p {
+  color: var(--text-med);
+  margin: 0 0 25px 0;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.btn-danger-solid {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-danger-solid:hover {
+  background: #dc2626;
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-high);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
